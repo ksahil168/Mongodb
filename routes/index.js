@@ -2,12 +2,12 @@ var express = require("express");
 var router = express.Router();
 
 //calling users mongodb file
-const sahilModel = require("./users");
+//const sahilModel = require("./users");
 
 /* GET home page. */
-router.get("/", function (req, res) {
+/* router.get("/", function (req, res) {
   res.render("index");
-});
+}); */
 
 //creating db and user in mongodb
 /* router.get("/create", async function (req, res) {
@@ -22,17 +22,35 @@ router.get("/", function (req, res) {
 //res.send(createduser);
 
 //finding or reading user
-router.get("/allusers", async function (req, res) {
+/* router.get("/allusers", async function (req, res) {
   let all = await sahilModel.find();
   res.send(all);
-});
+}); */
 
 //deleting user
-router.get("/delete", async function (req, res) {
+/* router.get("/delete", async function (req, res) {
   let deleteduser = await sahilModel.findOneAndDelete({
     username: "Kumar",
   });
   res.send(deleteduser);
+});*/
+
+//to create a cookie
+router.get("/", function (req, res) {
+  res.cookie("age", 25);
+  res.render("index");
+});
+
+//to see cookie data on server we have to use req
+router.get("/read", function (req, res) {
+  console.log(req.cookies);
+  res.send("check terminal");
+});
+
+//to delete a cookie
+router.get("/delete", function (req, res) {
+  res.clearCookie("age");
+  res.send("clear hogyi");
 });
 
 module.exports = router;
